@@ -13,5 +13,5 @@ if (function_exists('bind_textdomain_codeset'))
 
 $ObserverManager->addObserver('login_user','wishlist_completarTareas');
 
-$MyMetatag->setJs("/public/ajax/wishlist/ajax.wishlist.js");
+$MyMetatag->setJs("/modulos/wishlist/web/js/ajax.wishlist.js");
 ?>
