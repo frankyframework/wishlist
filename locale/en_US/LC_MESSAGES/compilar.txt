@@ -1,0 +1,3 @@
+msgfmt whislist.po --output-file=whislist.mo
+Variables: _wishlist("id")
+Cadenas: <?= _wishlist('id') ?>

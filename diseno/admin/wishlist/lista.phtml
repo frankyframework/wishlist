@@ -1,0 +1,94 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin">Favoritos</h1>
+        <p>En esta sección encontrarás todos los anuncios que te interesaron para que de forma fácil y rápida los puedas compartir o revisar las veces que sean necesarias.</p>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+                <?php echo $MyFiltrosForm->openTag(); ?>
+                <?php echo $MyFiltrosForm->getAllRow(); ?>
+                <?php echo $MyFiltrosForm->endTag(); ?>
+
+            </div>
+        </div>
+
+        <div  class="w-xxxx-12 cont_gral_admin cont_contactos">
+            <div >
+                <div class="w-xxxx-12">
+                    <div class="w-xxxx-12 contenedor_titulo_columnas">
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "wishlist.createdAt", "Fecha"); ?></div>
+                        <div class="w-xxxx-8"><?php echo makeHTMLOrder( $tabla.".".$campo_item, "Item"); ?></div>
+                        <div class="w-xxxx-2">Eliminar</div>
+                    </div>
+                    <div class="contenedor_columnas_info"  >
+                    <div class="w-xxxx-12 contenedor_columnas" id="content_row_{{_data.id}}" >
+                        <div class='{{_data.thisClass}} w-xxxx-3'>{{_data.createdAt}}</div>
+
+
+                        <div class='{{_data.thisClass}} w-xxxx-7'>{{_data.item}}</div>
+                        <div class='{{_data.thisClass}} w-xxxx-2'>
+                          <?php if($MyAccessList->MeDasChancePasar($permisos_grid)):  ?>
+                              <a class="btn_adm_eliminar" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a>
+                          <?php endif; ?>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="w-xxxx-12">
+                    <div class="no_hay_datos" >No hay Favoritos</div>
+                </div>
+                <div class="w-xxxx-12">
+                    <?php echo render("admin/widget.paginar.phtml"); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script >
+<!--
+$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($lista_admin_data); ?>,".no_hay_datos");
+$(window).load(function(){
+    $(".btn_adm_eliminar").click(function(event){
+
+         event.preventDefault();
+         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
+
+         EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,"","EliminarRegistorPanelRemove")
+
+    });
+
+
+});
+// -->
+</script>
+
+ <?php if(!$Mobile_detect->isMobile()): ?>
+<script >
+<!--
+$( document ).ready(function() {
+ $(function() {
+     $( "input[name=rango_inicial]" ).datepicker({
+         defaultDate: "+1w",
+         changeMonth: false,
+         numberOfMonths: 3,
+         dateFormat:"yy-mm-dd",
+         maxDate: "+0D",
+         onClose: function( selectedDate ) {
+         $("input[name=rango_final]" ).datepicker( "option", "minDate", selectedDate );
+         }
+     });
+     $( "input[name=rango_final]" ).datepicker({
+         defaultDate: "+1w",
+         changeMonth: false,
+         numberOfMonths: 3,
+         dateFormat:"yy-mm-dd",
+         maxDate: "+0D",
+         onClose: function( selectedDate ) {
+         $( "input[name=rango_inicial]").datepicker( "option", "maxDate", selectedDate );
+         }
+     });
+ });
+});
+// -->
+</script>
+<?php endif; ?>

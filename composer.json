@@ -1,0 +1,23 @@
+{
+    "name": "frankyframework/wishlist",
+    "type": "franky-module",
+    "description": "Wishlist",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Ussiel Acevedo",
+            "email": "ussiel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "frankyframework/module-installer-plugin" : "1.0.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wishlist\\": "src/"
+        }
+    },
+    "license": "MIT"
+}
