@@ -1,0 +1,52 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"uid",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            {
+                "name":"id_item",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            {
+                "name":"tabla",
+                "type":"varchar",
+                "length":40,
+                "null":0
+            },
+         
+            {
+                "name":"createdAt",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":11,
+                "default":1,
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"MyISAM"
+        }
+    },
+    "data":[]
+}
+
