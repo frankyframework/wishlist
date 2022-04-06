@@ -1,7 +1,7 @@
 <div class="content">
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
     <div class="w-xxxx-12 cont_global_admin">
-        <h1 class="titulo_seccion_admin">Favoritos</h1>
+        <h1 class="titulo_seccion_admin"> <?=_wishlist('Favoritos')?></h1>
         <p>En esta sección encontrarás todos los anuncios que te interesaron para que de forma fácil y rápida los puedas compartir o revisar las veces que sean necesarias.</p>
         <div class="w-xxxx-12 cont_header_panel">
             <div class="_wrapp_form_serch">
@@ -16,8 +16,8 @@
             <div >
                 <div class="w-xxxx-12">
                     <div class="w-xxxx-12 contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "wishlist.createdAt", "Fecha"); ?></div>
-                        <div class="w-xxxx-8"><?php echo makeHTMLOrder( $tabla.".".$campo_item, "Item"); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "wishlist.createdAt", _wishlist("Fecha")); ?></div>
+                        <div class="w-xxxx-8"><?php echo makeHTMLOrder( $tabla.".".$campo_item, _wishlist("Item")); ?></div>
                         <div class="w-xxxx-2">Eliminar</div>
                     </div>
                     <div class="contenedor_columnas_info"  >
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="w-xxxx-12">
-                    <div class="no_hay_datos" >No hay Favoritos</div>
+                    <div class="no_hay_datos" ><?=_wishlist('No hay Favoritos')?></div>
                 </div>
                 <div class="w-xxxx-12">
                     <?php echo render("admin/widget.paginar.phtml"); ?>
