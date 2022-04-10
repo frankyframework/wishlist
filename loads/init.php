@@ -3,7 +3,7 @@ use Franky\Core\ObserverManager;
 $ObserverManager = new ObserverManager;
 include 'lca.php';
 include 'util.php';
-bindtextdomain("wishlist", 'wishlist');
+__bindtextdomain("wishlist", 'wishlist');
 
 
 if (function_exists('bind_textdomain_codeset')) 
