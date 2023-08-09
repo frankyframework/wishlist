@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\ObserverManager;
 $ObserverManager = new ObserverManager;
-include 'lca.php';
+
 include 'util.php';
 __bindtextdomain("wishlist", 'wishlist');
 
