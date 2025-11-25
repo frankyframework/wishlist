@@ -43,7 +43,12 @@ $WishlistEntity->tabla($tabla);
 $WishlistModel->setCampoItem($campo_item);
 $WishlistModel->setTablaItem($tabla);
 $WishlistModel->setCampoItemId($campo_item_id);
-
+if (isset($campo_item_urlkey) && !empty($campo_item_urlkey) ) {
+    $WishlistModel->setCampoItemUrl($campo_item_urlkey);
+ }     
+ if (isset($campo_item_image) && !empty($campo_item_image) ) {
+    $WishlistModel->setCampoItemImage($campo_item_image);
+ }  
 
 $WishlistModel->setPage($MyPaginacion->getPage());
 $WishlistModel->setTampag($MyPaginacion->getTampageDefault());
@@ -67,6 +72,18 @@ if($WishlistModel->getTotal() > 0)
 	{
 		  $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 
+        if (isset($campo_item_urlkey) && !empty($campo_item_urlkey) && isset($urlView)) {
+            $registro["item"] = '<a href="'.str_replace("{campo_item_urlkey}",$registro["item_url_key"],$urlView).'" target="_blank">'.$registro["item"]."</a>" ;
+        }    
+        if (isset($campo_item_image) && !empty($campo_item_image) && isset($pathImage)) {
+         
+            $registro["item_image"] = str_replace("{campo_item_image}",$registro["item_image"],$pathImage);
+            $registro["item_image"] = str_replace("{campo_item_id}",$registro["id_item"],$registro["item_image"]);
+            if(!empty($registro["item_image"]) && file_exists($registro["item_image"]))
+            {
+                $registro['item_image'] = makeHTMLImg(imageResize($registro["item_image"],(isset($thumbW) ? $thumbW : 100),(isset($thumbH) ? $thumbH : 100), true),100,100,strip_tags($registro["item"]));
+            }
+        }     
 
       $lista_admin_data[] = array_merge($registro,array(
       "id" => $Tokenizer->token("whishist", $registro["id"]),

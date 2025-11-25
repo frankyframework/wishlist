@@ -6,6 +6,8 @@ class WishlistModel  extends \Franky\Database\Mysql\objectOperations
     private $campos;
     private $campo_item;
     private $campo_item_id;
+    private $campo_item_urlkey;
+    private $campo_item_image;
     private $tabla_item;
     private $busca;
     private $rango;
@@ -28,6 +30,14 @@ class WishlistModel  extends \Franky\Database\Mysql\objectOperations
     function setCampoItemId($item_id)
     {
         $this->campo_item_id = $item_id;
+    }
+    function setCampoItemUrl($campo_item_urlkey)
+    {
+        $this->campo_item_urlkey = $campo_item_urlkey;
+    }
+    function setCampoItemImage($campo_item_image)
+    {
+        $this->campo_item_image = $campo_item_image;
     }
 
     function setTablaItem($tabla)
@@ -75,6 +85,13 @@ class WishlistModel  extends \Franky\Database\Mysql\objectOperations
             "wishlist.id_item",
             $this->tabla_item.'.'.$this->campo_item.' as item'
         ];
+
+        if (!empty($this->campo_item_urlkey)) {
+            $campos[] = $this->tabla_item.'.'.$this->campo_item_urlkey.' as item_url_key';
+        }
+        if (!empty($this->campo_item_image)) {
+            $campos[] = $this->tabla_item.'.'.$this->campo_item_image.' as item_image';
+        }
 
         foreach($data as $k => $v)
         {
