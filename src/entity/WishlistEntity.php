@@ -22,7 +22,7 @@ class WishlistEntity
 
     public function exchangeArray($data)
     {
-        $this->id = (isset($data["id"]) ? $data["id"] : null);
+        $this->id = (isset($data["id"]) && !empty($data["id"]) ? $data["id"] : null);
         $this->uid = (isset($data["uid"]) ? $data["uid"] : null);
         $this->id_item = (isset($data["id_item"]) ? $data["id_item"] : null);
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
