@@ -93,22 +93,45 @@ class WishlistModel  extends \Franky\Database\Mysql\objectOperations
             $campos[] = $this->tabla_item.'.'.$this->campo_item_image.' as item_image';
         }
 
-        foreach($data as $k => $v)
-        {
-            $this->where()->addAnd("wishlist.".$k,$v,'=');
-        }
-      
-        if(!empty($this->busca))
-        {
-              $this->where()->addAnd($this->tabla_item.'.'.$this->campo_item,"%$this->busca%",'like');
-        }
         if(!empty($this->rango))
         {
               $this->where()->concat('AND (');
               $this->where()->addAnd('wishlist.createdAt',$this->rango[0].' 00:00:00','>=');
               $this->where()->addAnd('wishlist.createdAt',$this->rango[1].' 23:59:59','<=');
               $this->where()->concat(')');
+              unset($data['createdAt']);
         }
+
+        foreach($data as $k => $v)
+        {
+            if(!empty($v) || is_numeric($v))
+            {
+                if(is_array($v))
+                {
+                    $this->where()->concat('AND (');
+                    foreach ($v as $_v)
+                    {
+                    $this->where()->addOr("wishlist.".$k,$_v,'=');
+
+                    }
+                    $this->where()->concat(')');
+                }
+                else
+                {
+                    if(in_array($k,['id','createdAt'])) {
+                        $this->where()->addAnd("wishlist.".$k,$v,'=');
+                    } else {
+                        $this->where()->addAnd("wishlist.".$k,"%".$v."%",'like');
+                    }
+                } 
+            }
+        }
+
+        if(!empty($this->busca))
+        {
+              $this->where()->addAnd($this->tabla_item.'.'.$this->campo_item,"%$this->busca%",'like');
+        }
+        
 
         $this->from()->addInner($this->tabla_item,"wishlist.id_item",$this->tabla_item.".".$this->campo_item_id);
         $this->from()->addInner("users","users.id","wishlist.uid");
